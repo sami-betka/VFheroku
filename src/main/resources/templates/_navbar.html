@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="template">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" type="text/css" href="style.css" media="all" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title></title>
+  </head>
+  <body>
+  
+  <nav class="navbar navbar-expand-lg fixed-top bluecolor">
+  <a class="navbar-brand text-white" href="/products/list">FuturVideo</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon">
+      <a>
+        <svg width="30" height="30">
+            <path d="M0,5 30,5" stroke="#fff" stroke-width="5"/>
+            <path d="M0,14 30,14" stroke="#fff" stroke-width="5"/>
+            <path d="M0,23 30,23" stroke="#fff" stroke-width="5"/>
+        </svg>
+      </a>
+    </span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+    
+    
+      <li class="nav-item dropdown text-white">
+        <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Mon compte
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/users/me/details">Mes informations</a>
+          <a class="dropdown-item" href="/users/me/orders">Mes commandes</a>
+          
+          	</div>
+      </li>
+      
+      
+      <li class="nav-item dropdown text-white">
+        <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Catégories
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        			<tr th:each="c:${categories}">
+        			
+          <a class="dropdown-item" th:href="@{'/products/list/category/'+${c}}" th:utext="${c.name}"></a>
+          			</tr>
+          </div>
+      </li>
+      
+       <li class="nav-item dropdown text-white">
+        <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Années
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        			<tr th:each="y:${years}">
+        			
+          <a class="dropdown-item" th:href="@{'/products/list/year/'+${y}}" th:utext="${y}"></a>
+          			</tr>
+          </div>
+      </li>
+            
+    </ul>
+              <input class="btn btn-outline-success my-2 my-sm-0" style="margin-right: 10px" sec:authorize="hasRole('ROLE_ADMIN')" type="button" onclick="location.href='/administrate';" value="Administrer" />
+    
+    <form class="form-inline my-2 my-lg-0" th:action="@{/products/list}" method="get">
+<!--       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" name="motCle" th:value="${motCle}">
+           
+      <button style="margin-right: 10px" class="btn btn-outline-light my-2 my-sm-0" type="submit">Chercher</button>
+    </form>
+<!--           <input type="button" onclick="location.href='/users/me/cart';" th:value="'Mon panier '+${cart.quantity}" /> -->
+          
+          <button style="margin-right: 10px" type="button" class="btn btn-outline-light my-2 my-sm-0" onclick="location.href='/users/me/cart';" th:value="'Mon panier '+${cart.quantity}">
+  Mon panier <span class="badge badge-light" th:utext="${cart.quantity}"></span>
+  <span class="sr-only">Nombre d'articles</span>
+</button>
+          
+          <input class="btn btn-outline-light my-2 my-sm-0" sec:authorize="isAnonymous()" type="button" onclick="location.href='/login';" value="Connexion" /></button>
+		  <input class="btn btn-outline-light my-2 my-sm-0" sec:authorize="isAuthenticated()" type="button" onclick="location.href='/logout';" value="Déconnexion" /></button>
+          		  <!-- th:if="${#request.userPrincipal != null}"  -->
+  </div>
+</nav>
+
+
+
+<footer class="footer bluecolor">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+<!--                           <a class="text-white" href="/mail/send">Nous contacter</a> -->
+                
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!--     Optional JavaScript -->
+<!--     jQuery first, then Popper.js, then Bootstrap JS -->
+<!--     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+<!--     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script> -->
+<!--     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
+  </body>
+</html>

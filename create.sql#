@@ -1,0 +1,216 @@
+
+    create table app_role (
+       role_id bigint not null,
+        role_name varchar(30) not null,
+        primary key (role_id)
+    ) engine=MyISAM
+
+    create table artist (
+       id bigint not null,
+        name varchar(255),
+        primary key (id)
+    ) engine=MyISAM
+
+    create table artist_movies (
+       artist_id bigint not null,
+        movies_id bigint not null
+    ) engine=MyISAM
+
+    create table cart (
+       id bigint not null,
+        quantity integer,
+        primary key (id)
+    ) engine=MyISAM
+
+    create table cart_cart_products (
+       cart_id bigint not null,
+        cart_products_id bigint not null
+    ) engine=MyISAM
+
+    create table cart_product (
+       id bigint not null,
+        category integer,
+        description varchar(255),
+        director_name varchar(255),
+        length integer,
+        name varchar(255),
+        picture varchar(255),
+        price decimal(19,2),
+        quantity integer not null,
+        stock integer,
+        year integer,
+        primary key (id)
+    ) engine=MyISAM
+
+    create table cart_product_actors (
+       cart_product_id bigint not null,
+        actors_id bigint not null
+    ) engine=MyISAM
+
+    create table employee (
+       id bigint not null,
+        email varchar(255),
+        name varchar(255),
+        primary key (id)
+    ) engine=MyISAM
+
+    create table hibernate_sequence (
+       next_val bigint
+    ) engine=MyISAM
+
+    insert into hibernate_sequence values ( 1 )
+
+    insert into hibernate_sequence values ( 1 )
+
+    insert into hibernate_sequence values ( 1 )
+
+    insert into hibernate_sequence values ( 1 )
+
+    insert into hibernate_sequence values ( 1 )
+
+    insert into hibernate_sequence values ( 1 )
+
+    insert into hibernate_sequence values ( 1 )
+
+    insert into hibernate_sequence values ( 1 )
+
+    create table orders (
+       id bigint not null,
+        amount decimal(19,2),
+        date date,
+        delivery integer,
+        user_user_id bigint,
+        primary key (id)
+    ) engine=MyISAM
+
+    create table product (
+       id bigint not null,
+        category integer,
+        description varchar(255),
+        director_name varchar(255),
+        length integer,
+        name varchar(255),
+        photo varchar(255),
+        picture varchar(255),
+        price decimal(19,2),
+        rented bit not null,
+        stock integer,
+        year integer,
+        primary key (id)
+    ) engine=MyISAM
+
+    create table product_actors (
+       product_id bigint not null,
+        actors_id bigint not null
+    ) engine=MyISAM
+
+    create table user_account (
+       user_id bigint not null,
+        adress varchar(255),
+        email varchar(36) not null,
+        enabled bit not null,
+        encryted_password varchar(128) not null,
+        _first_name varchar(36),
+        full_name varchar(255),
+        last_name varchar(36),
+        user_name varchar(36) not null,
+        cart_id bigint,
+        primary key (user_id)
+    ) engine=MyISAM
+
+    create table user_account_orders (
+       user_account_user_id bigint not null,
+        orders_id bigint not null
+    ) engine=MyISAM
+
+    create table user_role (
+       id bigint not null,
+        role_id bigint not null,
+        user_id bigint not null,
+        primary key (id)
+    ) engine=MyISAM
+
+    alter table app_role 
+       add constraint APP_ROLE_UK unique (role_name)
+
+    alter table cart_cart_products 
+       add constraint UK_6iyqfvapdsmcl4d7fenxqtl18 unique (cart_products_id)
+
+    alter table user_account 
+       add constraint USER_ACCOUNT_UK unique (user_name)
+
+    alter table user_account_orders 
+       add constraint UK_blmavdofi63h8t1aly4j0vmdm unique (orders_id)
+
+    alter table user_role 
+       add constraint USER_ROLE_UK unique (user_id, role_id)
+
+    alter table artist_movies 
+       add constraint FKdipx5o961ph1ix2cdjnmskdq9 
+       foreign key (movies_id) 
+       references product (id)
+
+    alter table artist_movies 
+       add constraint FKpndcx8okl6excwb7uld4hfjyu 
+       foreign key (artist_id) 
+       references artist (id)
+
+    alter table cart_cart_products 
+       add constraint FK84skyyjnt6ygna9u3dwuyj3gc 
+       foreign key (cart_products_id) 
+       references cart_product (id)
+
+    alter table cart_cart_products 
+       add constraint FKcxat3enqpvlarcm20bkrl7b9 
+       foreign key (cart_id) 
+       references cart (id)
+
+    alter table cart_product_actors 
+       add constraint FKdqse7bsxrgw8c52l62qoxktc0 
+       foreign key (actors_id) 
+       references artist (id)
+
+    alter table cart_product_actors 
+       add constraint FKhgau7caw1a8s7jhlqkwut5sha 
+       foreign key (cart_product_id) 
+       references cart_product (id)
+
+    alter table orders 
+       add constraint FK65ljuyxxtu96ox671lomh1d5l 
+       foreign key (user_user_id) 
+       references user_account (user_id)
+
+    alter table product_actors 
+       add constraint FKragfx5wa3jtfg048r9cibpxtj 
+       foreign key (actors_id) 
+       references artist (id)
+
+    alter table product_actors 
+       add constraint FKbj4k27e1knmqh87s4kdyuumvy 
+       foreign key (product_id) 
+       references product (id)
+
+    alter table user_account 
+       add constraint FKed31o1ch7iu7liruia3t8s7uy 
+       foreign key (cart_id) 
+       references cart (id)
+
+    alter table user_account_orders 
+       add constraint FKclpvfmtoxxffco1ogmjk98frr 
+       foreign key (orders_id) 
+       references orders (id)
+
+    alter table user_account_orders 
+       add constraint FK9kmdsdq1bk2vtv1lpcsm2s8l9 
+       foreign key (user_account_user_id) 
+       references user_account (user_id)
+
+    alter table user_role 
+       add constraint FKp6m37g6n6c288s096400uw8fw 
+       foreign key (role_id) 
+       references app_role (role_id)
+
+    alter table user_role 
+       add constraint FK7ojmv1m1vrxfl3kvt5bi5ur73 
+       foreign key (user_id) 
+       references user_account (user_id)

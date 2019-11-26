@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="template">>
+<head>
+<meta charset="utf-8">
+<title>Détails produit</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+
+</head>
+<body>
+
+	<th:block th:include="/_navbar"></th:block>
+	
+	<div id="cart" class="col-md-8 marginlist"><!-- col-md-9 Begin -->
+	            <div class="box"><!-- box Begin -->
+	            
+	        <div class="row">    
+	            
+	     <div class="col-md-4">
+	    <img th:src="${product.picture}" class="card-img rounded float-left img-fluid" alt="Responsive image">
+	    </div>
+	            
+	      <div class="col-md-8">
+	              <h5 class="card-title" style="text-align: center; color:#008067" th:utext="${product.name}"></h5>
+	              <p style="text-align: center" th:utext="${product.description}"></p>
+	              
+	              
+                                   <!--.........................-->
+	                                              <hr>
+	        
+	        <div class="row">
+	        <div class="col-md-8" style="text-align:left">
+	     <p th:utext="'Titre:  '+${product.name}"></p>
+	     <p th:utext="'Catégorie:  '+${product.category}"></p>
+	     <p th:utext="'Réalisateur:  '+${product.directorName}"></p>
+	     
+	        
+	    </div>
+	    <div class="col-md-4" style="text-align:left">
+<!-- 	    <p th:utext="'Pays:  '+${product.country}"></p> -->
+	     <p th:utext="'Année:  '+${product.year}"></p>
+	     <p th:utext="'Durée:  '+${product.length}+' mn'"></p>
+	     	     <p th:utext="'Prix:  '+${product.price}"></p>
+	     
+	     
+	    </div>
+	       
+	        </div>
+	        
+	    </div>      
+	            
+	       </div>     
+	    </div><!-- box Finish -->
+	   <div>	 
+	   
+	   <a class="bluecolor text-white" th:href="@{'/users/add-to-cart/'+${product.id}+'/home'}" role="button">Ajouter au panier</a>
+	         
+	
+
+<!-- <div class="productcard card mb-3 marginform" style="max-width: 540px;"> -->
+<!--   <div class="row no-gutters"> -->
+<!--     <div class="col-md-4"> -->
+<!--       <img src="https://media2.woopic.com/api/v1/images/174%2Fcinemovies%2Fff4%2F311%2F49f5f4beb783fda6b0817d1f83%2Fmovies-114820-3.jpg?format=822x700&quality=85" class="card-img" alt="..."> -->
+<!--     </div> -->
+<!--     <div class="col-md-8"> -->
+<!--       <div class="card-body"> -->
+<!--         <h5 class="card-title" th:utext="${product.name}"></h5> -->
+<!--         <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> -->
+<!--         <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+<!--       </div> -->
+<!--     </div> -->
+<!--   </div> -->
+<!-- </div> -->
+
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+</body>
+</html>

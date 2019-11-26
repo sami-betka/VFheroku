@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<!-- <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> -->
+
+<meta name="viewport" content="width=device-width, initial-scale=1; charset=utf-8" />
+
+
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<title></title>
+</head>
+
+<body>
+<div id="container">
+		<div id="header">
+        	<h1>Futur<span class="off">Video</span></h1>
+            <!-- <h2>A template by Bryant Smith</h2> -->
+        </div>   
+        
+        <div id="menu">
+        	<ul>
+            	<li class="menuitem"><a href="#">Home</a></li>
+                <li class="menuitem"><a href="#">About</a></li>
+                <li class="menuitem"><a href="#">Products</a></li>
+                <li class="menuitem"><a href="#">Services</a></li>
+                <li class="menuitem"><a href="#">Design</a></li>
+              <li class="menuitem"><a href="#">Contact</a></li>
+            </ul>
+        </div>
+        
+        <div id="leftmenu">
+
+        <div id="leftmenu_top"></div>
+
+				<div id="leftmenu_main">    
+                
+                <h3>Links</h3>
+                        
+                <ul>
+                    <li><a href="#">SEO</a></li>
+                    <li><a href="#">PHP</a></li>
+                    <li><a href="#">Ajax</a></li>
+                    <li><a href="#">jQuery</a></li>
+                    <li><a href="#">Web design</a></li>
+                    <li><a href="#">Web Programming</a></li>
+                    <li><a href="#">Content Creation</a></li>
+                    <li><a href="#">Internet Marketing</a></li>
+                    <li><a href="#">XHTML Templates</a></li>
+                </ul>
+</div>
+                
+                
+              <div id="leftmenu_bottom"></div>
+        </div>
+        
+        
+        
+        
+		<div id="content">
+        
+        
+        <div id="content_top"></div>
+        <div id="content_main">
+            <div class="container-fluid">
+		<div class="col-md-9 cards">
+			<h2 class="text-center">Nos films</h2>
+			<br>
+			<tr th:each="p:${products}">
+
+				<div class="card" style="width: 18rem;">
+					<img src="..." class="card-img-top" alt="...">
+					<div class="card-body">
+						<h5 class="card-text" th:utext="${p.name}"></h5>
+						<p class="card-text" th:utext="${p.year}"></p>
+						<p class="card-text" th:utext="${p.category}"></p>
+						<!-- 									<a th:href="@{'edit-product/'+${p.id}}">Modifier</a> <a -->
+						<!-- 										onclick="confirm('etes vous sur de vouloir supprimer')" -->
+						<!-- 										th:href="@{'/admin/delete-product/'+${p.id}}">Supprimer -->
+						<!-- 									</a> -->
+						<a th:href="@{'add-to-cart/'+${p.id}+'home'}">Ajouter au
+							panier</a>
+					</div>
+				</div>
+			</tr>
+		</div>
+	</div>
+            
+
+        <div id="content_bottom"></div>
+            
+            <div id="footer"><h3><a href="http://www.bryantsmith.com">florida web design</a></h3></div>
+      </div>
+   </div>
+</body>
+</html>

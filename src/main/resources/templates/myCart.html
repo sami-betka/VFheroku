@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="template">>
+<head>
+<meta charset="utf-8">
+<title>Mon panier</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+
+
+
+
+<style>
+body {
+	background-image: url("");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+</style>
+
+
+</head>
+<body>
+
+	<th:block th:include="/_navbar"></th:block>
+
+
+<div id="cart" class="col-md-8 marginlist"><!-- col-md-9 Begin -->
+
+ 
+
+	   <div class="box"><!-- box Begin -->
+	   
+	   <div class="box bluecolor">
+	           <h2 class="text-white" style="text-align: center">Votre panier</h2>
+           </div>
+           
+	<tr th:each="p:${prods}">
+	   	<div class="row">
+	        <div class="col-md-3">
+			<H5 style="text-align: left" th:utext="${p.name}+':  '"></H5>
+				<hr>
+            </div>  
+            
+             <div class="col-md-9">
+                          <div class="row">
+                          <div class="col-md-3">
+			<p th:utext="'Prix:  '+${p.price}"></p>
+			            	<hr>
+				            </div>  
+				      <div class="col-md-9">
+				      <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+  
+  <div class="btn-group mr-2" role="group" aria-label="Second group">
+   <h5>Quantité : </h5>
+    <a type="button" class="btn" th:href="@{'/users/me/cart/remove/'+${p.id}}">-</a>
+    <button type="button" class="btn text-white" style="background-color: #2931C9" th:utext="${p.quantity}"></button>
+    <a type="button" class="btn" th:href="@{'/users/add-to-cart2/'+${p.id}+'/home'}">+</a>
+  </div>
+</div>
+<!-- <!-- 				      			<p th:utext="'Quantité:  '+"></p> --> 
+<!--             <p>Quantité :   <input class="btn btn-outline-dark my-2 my-sm-0" type="button" value="-"></button> -->
+<!--                                           <span class="badge bluecolor text-white" th:utext="${p.quantity}"></span>  -->
+<!--                             <input class="btn btn-outline-dark" type="button" value="+"></button> -->
+<!--             </p> -->
+           
+<!-- 				              <hr> -->
+				      </div>      
+				            </div>  
+				
+            </div>  
+          </div>  
+	  </tr>
+	  
+	    </div><!-- box Finish -->
+	 
+	 
+	   <div><!-- cart Finish -->
+
+  <input class="bluecolor text-white" type="button" onclick="location.href='/users/to-payment';" value="Valider mon panier" />
+	
+
+
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+			integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+			crossorigin="anonymous"></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+			integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+			crossorigin="anonymous"></script>
+		<script
+			src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+			integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+			crossorigin="anonymous"></script>
+</body>
+</html>

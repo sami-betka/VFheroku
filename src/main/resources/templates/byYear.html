@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="template">
+<head>
+<meta charset="utf-8">
+<title>Par année</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+
+<style>
+body {
+	background-image: url("");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+</style>
+
+
+</head>
+<body>
+
+	<th:block th:include="/_navbar"></th:block>
+		
+	  <div id="cart" class="col-md-8 marginlist"><!-- col-md-9 Begin -->
+	            <div class="box card-columns"><!-- box Begin -->
+ 
+                  	<tr th:each="p:${pageProducts.content}">
+ 			
+<div class="card box">
+	<img th:src="${p.picture}" class="card-img-top" alt="...">
+
+  <div class="card-body">
+  	<h5 class="card-title" style="" th:utext="${p.name}"></h5> 
+											
+		<p>	<a sec:authorize="hasRole('ROLE_ADMIN')" class="card-link" th:href="@{'/admin/edit-product/'+${p.id}}">Modifier</a> </p>
+<p>	<a sec:authorize="hasRole('ROLE_ADMIN')" class="card-link" onclick="confirm('etes vous sur de vouloir supprimer')" th:href="@{'/admin/delete-product/'+${p.id}}">Supprimer</a></p>
+		<p>	<a class="card-link bluecolor text-white" th:href="@{'details/'+${p.id}}">Détails</a></p>
+  </div>
+    <div class="card-footer">
+    <a class="bluecolor text-white" th:href="@{'/users/add-to-cart/'+${p.id}+'/byYear'}">Ajouter au panier</a>
+    </div>
+</div>
+</tr> 
+         </div><!-- box Finish -->
+               
+              <div class="box"><!-- box Begin -->
+
+<div class="container">
+<ul class="nav nav-pills">
+<li th:each="p:${pages}" th:class="${p==currentpage}?active:''">
+ <label>
+<a class="btn btn-primary" th:text="${p}" th:href="@{list(page=${p}, motCle=${motCle})}"></a>
+</label>
+</li>
+</ul>
+</div>   
+	      </div><!-- box Finish -->
+	   <div>	
+	
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+</body>
+</html>
